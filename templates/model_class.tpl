@@ -294,8 +294,8 @@ abstract class <?=$this->_namespace?>Model_ModelAbstract
         $methods = get_class_methods($this);
         foreach ($options as $key => $value) {
             $key = preg_replace_callback('/_(.)/',
-                                         function ($matches) {
-                                           return ucfirst($matches[1]);},
+                                         create_function ('$matches',
+                                           'return ucfirst($matches[1]);'),
                                           $key);
             $method = 'set' . ucfirst($key);
 
