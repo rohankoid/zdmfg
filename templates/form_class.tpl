@@ -24,7 +24,7 @@ require_once 'Zend<?=DIRECTORY_SEPARATOR?>Form.php';
  * @subpackage Form
  * @author <?=$this->_author."\n"?>
  */
-class <?=$this->_namespace?>BaseForm extends Zend_Form
+class <?=$this->_namespace?>Form_BaseForm extends Zend_Form
 {
     /**
      *  @var array Decorators to use for standard form elements

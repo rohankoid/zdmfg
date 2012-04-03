@@ -204,10 +204,16 @@ class Make_mysql extends MakeDbTable {
 			} else {
 				$comment = null;
 			}
-
+                        $required = false;
+                        if($row['Null'] == 'NO') {
+                            $required = true;
+                        }                        
 			if ($row['Key'] == 'PRI') {
 				$primaryKey[] = array(
+                    'key'         => $row['Key'],
+                    'required'    => $required,
                     'field'       => $row['Field'],
+                    'label'       => $this->_getLabel($row['Field']),
                     'type'        => $row['Type'],
                     'phptype'     => $this->_convertTypeToPhp($row['Type']),
                     'capital'     => $this->_getCapital($row['Field']),
@@ -216,7 +222,10 @@ class Make_mysql extends MakeDbTable {
 			}
 
 			$columns[] = array(
+                'key'     => $row['Key'],
+                'required'    => $required,
                 'field'   => $row['Field'],
+                'label'       => $this->_getLabel($row['Field']),
                 'type'    => $row['Type'],
                 'phptype' => $this->_convertTypeToPhp($row['Type']),
                 'capital' => $this->_getCapital($row['Field']),

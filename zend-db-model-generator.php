@@ -4,8 +4,8 @@ if (!is_file(dirname(__FILE__).'/config/config.php')) {
     die("please copy config/config.php-default to config/config.php and modify.");
 }
 
-define('VERSION', '0.6');
-define('AUTHOR',  'Kfir Ozer <kfirufk@gmail.com>');
+define('VERSION', '0.7');
+define('AUTHOR',  'Kfir Ozer <kfirufk@gmail.com> | Rohan <rohankoid@gmail.com>');
 
 require_once('class/MakeDbTable.php');
 require_once('class/ArgvParser.php');

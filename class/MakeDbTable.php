@@ -246,6 +246,23 @@ abstract class MakeDbTable {
     }
 
     /**
+     *
+     *  removes underscores and capital the letter that was after the underscore
+     *  example: 'ab_cd_ef' to 'Ab Cd Ef'
+     *
+     * @param String $str
+     * @return String
+     */
+    protected function _getLabel($str) {
+        $temp = array();
+        foreach (explode("_", $str) as $part) {            
+            $temp[]=ucfirst($part);
+        }
+        $temp = implode(" ", $temp);
+        return $temp;
+    }
+
+    /**
      * 	Removes underscores and capital the letter that was after the underscore
      *  example: 'ab_cd_ef' to 'AbCdEf'
      *
@@ -579,7 +596,7 @@ abstract class MakeDbTable {
         $this->makeDbTableFile();
         $this->makeMapperFile();
         $this->makeModelFile();
-//        $this->makeFormFile();
+        $this->makeFormFile();
 
         $modelFile = $this->getLocation() . DIRECTORY_SEPARATOR . 'ModelAbstract.php';
         $modelData = $this->getParsedTplContents('model_class.tpl');

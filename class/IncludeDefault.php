@@ -9,27 +9,30 @@ require_once 'IncludeAbstract.php';
  */
 class Model_Default extends IncludeAbstract {
 
-	/**
-	 *
-	 * @see IncludeAbstract::getType()
-	 */
-	public function getType() {
-		return self::TYPE_MODEL;
-	}
+    /**
+     *
+     * @see IncludeAbstract::getType()
+     */
+    public function getType() {
+        return self::TYPE_MODEL;
+    }
 
-	/**
-	 *
-	 * @see IncludeAbstract::setFunctions()
-	 */
-	public function setFunctions() {
-	}
+    /**
+     *
+     * @see IncludeAbstract::setFunctions()
+     */
+    public function setFunctions() {
+        
+    }
 
-	/**
-	 *
-	 * @see IncludeAbstract::setVars()
-	 */
-	public function setVars() {
-	}
+    /**
+     *
+     * @see IncludeAbstract::setVars()
+     */
+    public function setVars() {
+        
+    }
+
 }
 
 /**
@@ -39,27 +42,30 @@ class Model_Default extends IncludeAbstract {
  */
 class Form_Default extends IncludeAbstract {
 
-	/**
-	 *
-	 * @see IncludeAbstract::getType()
-	 */
-	public function getType() {
-		return self::TYPE_FORM;
-	}
+    /**
+     *
+     * @see IncludeAbstract::getType()
+     */
+    public function getType() {
+        return self::TYPE_FORM;
+    }
 
-	/**
-	 *
-	 * @see IncludeAbstract::setFunctions()
-	 */
-	public function setFunctions() {
-	}
+    /**
+     *
+     * @see IncludeAbstract::setFunctions()
+     */
+    public function setFunctions() {
+        
+    }
 
-	/**
-	 *
-	 * @see IncludeAbstract::setVars()
-	 */
-	public function setVars() {
-	}
+    /**
+     *
+     * @see IncludeAbstract::setVars()
+     */
+    public function setVars() {
+        
+    }
+
 }
 
 /**
@@ -69,27 +75,30 @@ class Form_Default extends IncludeAbstract {
  */
 class Mapper_Default extends IncludeAbstract {
 
-	/**
-	 *
-	 * @see IncludeAbstract::getType()
-	 */
-	public function getType() {
-		return self::TYPE_MAPPER;
-	}
+    /**
+     *
+     * @see IncludeAbstract::getType()
+     */
+    public function getType() {
+        return self::TYPE_MAPPER;
+    }
 
-	/**
-	 *
-	 * @see IncludeAbstract::setFunctions()
-	 */
-	public function setFunctions() {
-	}
+    /**
+     *
+     * @see IncludeAbstract::setFunctions()
+     */
+    public function setFunctions() {
+        
+    }
 
-	/**
-	 *
-	 * @see IncludeAbstract::setVars()
-	 */
-	public function setVars() {
-	}
+    /**
+     *
+     * @see IncludeAbstract::setVars()
+     */
+    public function setVars() {
+        
+    }
+
 }
 
 /**
@@ -99,25 +108,28 @@ class Mapper_Default extends IncludeAbstract {
  */
 class DbTable_Default extends IncludeAbstract {
 
-	/**
-	 *
-	 * @see IncludeAbstract::getType()
-	 */
-	public function getType() {
-		return self::TYPE_DBTABLE;
-	}
+    /**
+     *
+     * @see IncludeAbstract::getType()
+     */
+    public function getType() {
+        return self::TYPE_DBTABLE;
+    }
 
-	/**
-	 *
-	 * @see IncludeAbstract::setFunctions()
-	 */
-	public function setFunctions() {
-	}
+    /**
+     *
+     * @see IncludeAbstract::setFunctions()
+     */
+    public function setFunctions() {
+        
+    }
 
-	/**
-	 *
-	 * @see IncludeAbstract::setVars()
-	 */
-	public function setVars() {
-	}
+    /**
+     *
+     * @see IncludeAbstract::setVars()
+     */
+    public function setVars() {
+        
+    }
+
 }
