@@ -64,7 +64,7 @@ if (sizeof($params['--location']) == 1) {
     $path=__DIR__.DIRECTORY_SEPARATOR.$params['--database'][0].DIRECTORY_SEPARATOR;
 }
 
-foreach (array('DbTable', 'mappers') as $name) {
+foreach (array('DbTable', 'mappers', 'Form') as $name) {
     $dir = $path . $name;
     if (!is_dir($dir)) {
         if (!@mkdir($dir,0755,true)) {

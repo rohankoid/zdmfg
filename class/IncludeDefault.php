@@ -33,6 +33,36 @@ class Model_Default extends IncludeAbstract {
 }
 
 /**
+ * @author Rohan 
+ *
+ *
+ */
+class Form_Default extends IncludeAbstract {
+
+	/**
+	 *
+	 * @see IncludeAbstract::getType()
+	 */
+	public function getType() {
+		return self::TYPE_FORM;
+	}
+
+	/**
+	 *
+	 * @see IncludeAbstract::setFunctions()
+	 */
+	public function setFunctions() {
+	}
+
+	/**
+	 *
+	 * @see IncludeAbstract::setVars()
+	 */
+	public function setVars() {
+	}
+}
+
+/**
  * @author Steven Hadfield
  *
  *

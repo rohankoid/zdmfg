@@ -1,15 +1,16 @@
 <?php
 
 /**
- * Class name should be (Model|Mapper|DbTable)_(ucfirst(TableName)
+ * Class name should be (Model|Mapper|DbTable|From)_(ucfirst(TableName)
  *
- * @author Steven Hadfield
+ * @author Steven Hadfield | Rohan Shrestha
  */
 abstract class IncludeAbstract
 {
 	const TYPE_MODEL = 'Model';
 	const TYPE_MAPPER = 'Mapper';
 	const TYPE_DBTABLE = 'DbTable';
+        const TYPE_FORM = 'Form';
 
     protected $_vars;
 
@@ -82,7 +83,9 @@ abstract class IncludeAbstract
     		case self::TYPE_DBTABLE:
     			$class .= 'DbTable_TableAbstract';
     			break;
-
+                case self::TYPE_FORM:
+                        $class = 'Form_BaseForm';
+                        break;
     		default:
     			throw new Exception('Unknown Type');
     			break;

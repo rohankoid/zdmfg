@@ -10,7 +10,7 @@
  * @license <?=$this->_license."\n"?>
  */
 
-class <?=$this->_namespace?>Form_<?=$this->_className?> extends Zend_Form
+class <?=$this->_namespace?>Form_<?=$this->_className?> extends <?=$this->_includeForm->getParentClass() . "\n"?>
 {
 
 <?php foreach ($this->_columns as $column): ?>

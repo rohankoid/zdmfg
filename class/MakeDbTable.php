@@ -67,6 +67,11 @@ abstract class MakeDbTable {
      */
     protected $_includeModel;
     /**
+     *
+     * @var String $_includeForm
+     */
+    protected $_includeForm;
+    /**
      *   @var String $_includeTable
      */
     protected $_includeTable;
@@ -539,6 +544,31 @@ abstract class MakeDbTable {
     }
 
     /**
+     * @author Rohan <rohankoid@gmail.com>
+     * creates the form class file
+     */
+    function makeFormFile() {
+
+        $class = 'Form_' . $this->_className;
+        $file = $this->getIncludePath() . $class . '.inc.php';
+        if (file_exists($file)) {
+            include_once $file;
+            $include = new $class($this->_namespace);
+            $this->_includeForm = $include;
+        } else {
+            $this->_includeForm = new Form_Default($this->_namespace);
+        }
+        
+        $formFile = $this->getLocation() . DIRECTORY_SEPARATOR . 'Form' . DIRECTORY_SEPARATOR . $this->_className . '.php';
+
+        $formData = $this->getParsedTplContents('form.tpl');
+
+        if (!file_put_contents($formFile, $formData)) {
+            die("Error: could not write form file $formFile.");
+        }
+    }
+    
+    /**
      *
      * creates all class files
      *
@@ -549,12 +579,22 @@ abstract class MakeDbTable {
         $this->makeDbTableFile();
         $this->makeMapperFile();
         $this->makeModelFile();
+//        $this->makeFormFile();
 
         $modelFile = $this->getLocation() . DIRECTORY_SEPARATOR . 'ModelAbstract.php';
         $modelData = $this->getParsedTplContents('model_class.tpl');
 
         if (!file_put_contents($modelFile, $modelData))
             die("Error: could not write model file $modelFile.");
+
+        /**
+         * BaseForm Class Generator
+         */
+        $formFile = $this->getLocation() . DIRECTORY_SEPARATOR . 'Form' . DIRECTORY_SEPARATOR . 'BaseForm.php';
+        $formData = $this->getParsedTplContents('form_class.tpl');        
+
+        if (!file_put_contents($formFile, $formData))
+            die("Error: could not write form file $formFile.");
 
         $paginatorFile = $this->getLocation() . DIRECTORY_SEPARATOR . 'Paginator.php';
         $paginatorData = $this->getParsedTplContents('paginator_class.tpl');
@@ -587,6 +627,10 @@ abstract class MakeDbTable {
 
         if (is_dir($this->getIncludePath() . 'dbtable')) {
             $this->copyIncludeFiles($this->getIncludePath() . 'dbtable', $this->getLocation() . 'DbTable');
+        }
+
+        if (is_dir($this->getIncludePath() . 'form')) {
+            $this->copyIncludeFiles($this->getIncludePath() . 'form', $this->getLocation() . 'Form');
         }
 
         /* 		$templatesDir=realpath(dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'templates').DIRECTORY_SEPARATOR;
