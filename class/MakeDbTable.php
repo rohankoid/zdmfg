@@ -576,7 +576,7 @@ abstract class MakeDbTable {
             $this->_includeForm = new Form_Default($this->_namespace);
         }
         
-        $formFile = $this->getLocation() . DIRECTORY_SEPARATOR . 'Form' . DIRECTORY_SEPARATOR . $this->_className . '.php';
+        $formFile = $this->getLocation() .DIRECTORY_SEPARATOR. '..'. DIRECTORY_SEPARATOR . 'forms' . DIRECTORY_SEPARATOR . $this->_className . '.php';
 
         $formData = $this->getParsedTplContents('form.tpl');
 
@@ -607,7 +607,7 @@ abstract class MakeDbTable {
         /**
          * BaseForm Class Generator
          */
-        $formFile = $this->getLocation() . DIRECTORY_SEPARATOR . 'Form' . DIRECTORY_SEPARATOR . 'BaseForm.php';
+        $formFile = $this->getLocation() .DIRECTORY_SEPARATOR.'..'. DIRECTORY_SEPARATOR . 'forms' . DIRECTORY_SEPARATOR . 'BaseForm.php';
         $formData = $this->getParsedTplContents('form_class.tpl');        
 
         if (!file_put_contents($formFile, $formData))
@@ -647,7 +647,7 @@ abstract class MakeDbTable {
         }
 
         if (is_dir($this->getIncludePath() . 'form')) {
-            $this->copyIncludeFiles($this->getIncludePath() . 'form', $this->getLocation() . 'Form');
+            $this->copyIncludeFiles($this->getIncludePath() . 'form', $this->getLocation() .DIRECTORY_SEPARATOR.'..'. DIRECTORY_SEPARATOR.'forms');
         }
 
         /* 		$templatesDir=realpath(dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'templates').DIRECTORY_SEPARATOR;

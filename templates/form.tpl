@@ -61,6 +61,7 @@ class <?=$this->_namespace?>Form_<?=$this->_className?> extends <?=$this->_inclu
         $this->addElement('select', '<?=$column['capital']?>', array('label' => '<?=$column['label']?>'));
         $<?=lcfirst($column['capital'])?> = $this->getElement('<?=$column['capital']?>');
         $options = <?=preg_replace('/enum/i', 'array', $column['type'])?>;
+        $<?=lcfirst($column['capital'])?>->addMultiOption('', '- Select One -');
         foreach ($options as $option) {
                 $<?=lcfirst($column['capital'])?>->addMultiOption($option, $option);
             }
@@ -99,6 +100,7 @@ class <?=$this->_namespace?>Form_<?=$this->_className?> extends <?=$this->_inclu
         $this->addElement('select', '<?=$this->_getRelationName($key, 'parent')?>', array('label' => '<?=$key['foreign_tbl_name']?>'));
         $<?=lcfirst($this->_getRelationName($key, 'parent'))?> = $this->getElement('<?=$this->_getRelationName($key, 'parent')?>');
         $modelObj = new <?=$this->_namespace?>Model_<?=$this->_getClassName($key['foreign_tbl_name'])?>;
+        $<?=lcfirst($this->_getRelationName($key, 'parent'))?>->addMultiOption('', '- Select One -');
         foreach ($modelObj->getMapper()->fetchAllToArray() as $row) {
                 $<?=lcfirst($this->_getRelationName($key, 'parent'))?>->addMultiOption($row['<?=$key['foreign_tbl_column_name']?>'], $row['<?=$key['foreign_tbl_name']?>']);
             }

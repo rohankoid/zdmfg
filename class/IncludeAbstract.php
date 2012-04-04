@@ -7,10 +7,11 @@
  */
 abstract class IncludeAbstract
 {
-	const TYPE_MODEL = 'Model';
-	const TYPE_MAPPER = 'Mapper';
-	const TYPE_DBTABLE = 'DbTable';
-        const TYPE_FORM = 'Form';
+    
+    const TYPE_MODEL = 'Model';
+    const TYPE_MAPPER = 'Mapper';
+    const TYPE_DBTABLE = 'DbTable';
+    const TYPE_FORM = 'Form';
 
     protected $_vars;
 
@@ -84,7 +85,7 @@ abstract class IncludeAbstract
     			$class .= 'DbTable_TableAbstract';
     			break;
                 case self::TYPE_FORM:
-                        $class = 'Form_BaseForm';
+                        $class = $this->_namespace .'Form_BaseForm';
                         break;
     		default:
     			throw new Exception('Unknown Type');
