@@ -1,3 +1,30 @@
+2012-02-26 18:21:36  pedrospdc@gmail.com
+version 0.7 rc1 is out!
+    - Added more column types to DB->PHP conversion.
+    - Abstract model's require won't be added anymore if the require
+flag is set to false.
+    - Added support to multiple where/and statements on
+fetchList/fetchListToArray
+    - Added support to PDO escape statements on
+fetchList/fetchListToArray
+
+    	$query = array(
+    		array('id = ?', $id), //WHERE
+    		'publish_date >= NOW()' //AND
+    	);
+
+    	Please notice that you just need to use the second level array
+in order to escape the query.
+    - Added save.return_id flag to config. If set, every insert save
+method will return its primary key value (last inserted id). This won't
+happen when updating.
+
+ Now fetchList and fetchListArray may be used from model - added
+fetchList regex recognition to model abstract __call
+
+- Added support to PDO escape and multiple where/and to countByQuery
+- pdo and general bugs
+
 2011-08-21 14:33:39 kfirufk@gmail.com
        * version 0.6
 	- 0.6 beta as moved to the official version
@@ -5,9 +32,9 @@
         - added try catch to the pdo string generator to show proper error instead of seeing an exception
           being thrown
 	- fixed issue 8: added unix socket support for mysql server
-    - checked issue 7 and it seems that the 0.6 beta patch fixed the issue (support for composite primary key).   
+    - checked issue 7 and it seems that the 0.6 beta patch fixed the issue (support for composite primary key).
         + please note. project was moved from SVN to GIT.
-        
+
 
 2011-03-24 14:41 hadfieldster@gmail.com
 
@@ -22,10 +49,10 @@
            - Optional logging of exceptions with Zend_Log support
            - Saving inside database transactions
            - Output conforms with Zend Framework formatting style
-           - Consolidated common functionality into Abstract classes 
+           - Consolidated common functionality into Abstract classes
            - Database comments included into generated model
            - Optional handling of datetimes with Zend_Date
-		   - TODO: 
+		   - TODO:
 				-Regenerate models for example
 				-Cleanup code
 				-Improve PHPdoc
@@ -44,27 +71,27 @@
            - started working on reference map for innodb tables, needs
 	   testing. the referencemap variable is appended to the appropriate
 	   class.
-	   - new testzdmg directory: a working project to demostrate 
+	   - new testzdmg directory: a working project to demostrate
 	     the usage of the classes that are created by this script.
 	     currently has 2 examples, need to add alot more in the future.
-	   
+
 
 2009-11-30 00:56 kfirufk@gmail.com
         * version 0.4a
-	  * updated readme regarding the new model and dbtable 
+	  * updated readme regarding the new model and dbtable
 	    parent classes
 
         * version 0.4 is complete!
-	  new command line parameters for the script 
+	  new command line parameters for the script
 	     * support for listing and unlisting tables by their names
 	       or by regular expressions.
-	     * common functions from model class where seperated to 
+	     * common functions from model class where seperated to
 	       a parent class MainModel
 	     * common functions from dbtable class where seperated to
 	       a parent class MainDbTable
 	     * support to list all tables in a database
 	     * support for modifying a row without loading it first
-	       (big thanks to Aleksandar Scepanovic): 
+	       (big thanks to Aleksandar Scepanovic):
 	        <?php
 		   $foo = new Default_Model_Foo();
                    $foo->setId(5);
@@ -403,7 +430,7 @@
 
 	* readme.txt[ADD], zend-db-model-generator.php[ADD]: version 0.1
 
-2009-07-02 11:39  
+2009-07-02 11:39
 
 	* .[ADD]: Initial directory structure.
 
