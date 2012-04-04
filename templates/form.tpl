@@ -24,38 +24,6 @@ class <?=$this->_namespace?>Form_<?=$this->_className?> extends <?=$this->_inclu
          * @var Zend_Form_Element_Checkbox <?=$column['capital'] . "\n"?>
          */
          $this->addElement('checkbox','<?=$column['capital']?>', array('label'=>'<?=$column['label']?>'));
-    <?php elseif ($column['phptype'] == 'double' || $column['phptype'] == 'float') :?>
-
-        /**
-         * Form Element type Text
-         *
-         * Validation Float
-         *
-         * @var Zend_Form_Element_Text <?=$column['capital'] . "\n"?>
-         */
-        $this->addElement('text', '<?=$column['capital']?>', array('label' => '<?=$column['label']?>'));
-        $this->getElement('<?=$column['capital']?>')
-        <? if ($column['required']) { ?>
-             ->setRequired(true)
-        <? } ?>
-             ->addValidator('float')
-             ->addFilter('StringTrim');
-    <?php elseif ($column['phptype'] == 'int') :?>
-
-        /**
-         * Form Element type Text
-         *
-         * Validation Int
-         *
-         * @var Zend_Form_Element_Text <?=$column['capital'] . "\n"?>
-         */
-        $this->addElement('text', '<?=$column['capital']?>', array('label' => '<?=$column['label']?>'));
-        $this->getElement('<?=$column['capital']?>')
-        <? if ($column['required']) { ?>
-             ->setRequired(true)
-        <? } ?>
-             ->addValidator('int')
-             ->addFilter('StringTrim');
     <?php elseif ($column['type'] == 'text') :?>
 
         /**
@@ -81,6 +49,13 @@ class <?=$this->_namespace?>Form_<?=$this->_className?> extends <?=$this->_inclu
         <? if ($column['required']) { ?>
              ->setRequired(true)
         <? } ?>
+        <?php if ($column['phptype'] == 'double' || $column['phptype'] == 'float') :?>
+             ->addValidator('float')
+        <?php elseif ($column['phptype'] == 'int') :?>
+             ->addValidator('int')
+        <?php elseif (preg_match('/email/i', $column['field'])) :?>
+             ->addValidator('email')
+        <? endif;?>
              ->addFilter('StringTrim');
     <?endif;?>
     <?endif;?>
