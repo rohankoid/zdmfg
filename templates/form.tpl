@@ -24,6 +24,7 @@ class <?=$this->_namespace?>Form_<?=$this->_className?> extends <?=$this->_inclu
          * @var Zend_Form_Element_Checkbox <?=$column['capital'] . "\n"?>
          */
          $this->addElement('checkbox','<?=$column['capital']?>', array('label'=>'<?=$column['label']?>'));
+
     <?php elseif ($column['type'] == 'text') :?>
 
         /**
@@ -32,6 +33,19 @@ class <?=$this->_namespace?>Form_<?=$this->_className?> extends <?=$this->_inclu
          * @var Zend_Form_Element_TextArea <?=$column['capital'] . "\n"?>
          */
         $this->addElement('textarea', '<?=$column['capital']?>', array('label' => '<?=$column['label']?>'));
+        $this->getElement('<?=$column['capital']?>')
+        <? if ($column['required']) { ?>
+             ->setRequired(true)
+        <? } ?>
+             ->addFilter('StringTrim');
+    <?php elseif (preg_match('/password/i', $column['field'])) :?>
+             
+        /**
+         * Form Element type Password
+         *
+         * @var Zend_Form_Element_Password <?=$column['capital'] . "\n"?>
+         */
+        $this->addElement('password', '<?=$column['capital']?>', array('label' => '<?=$column['label']?>'));
         $this->getElement('<?=$column['capital']?>')
         <? if ($column['required']) { ?>
              ->setRequired(true)
@@ -46,19 +60,45 @@ class <?=$this->_namespace?>Form_<?=$this->_className?> extends <?=$this->_inclu
          */
         $this->addElement('text', '<?=$column['capital']?>', array('label' => '<?=$column['label']?>'));
         $this->getElement('<?=$column['capital']?>')
-        <? if ($column['required']) { ?>
-             ->setRequired(true)
-        <? } ?>
+        <? if ($column['required']):?>
+        ->setRequired(true)
+        <? endif; ?>
         <?php if ($column['phptype'] == 'double' || $column['phptype'] == 'float') :?>
-             ->addValidator('float')
+->addValidator('float')
         <?php elseif ($column['phptype'] == 'int') :?>
-             ->addValidator('int')
+->addValidator('int')
         <?php elseif (preg_match('/email/i', $column['field'])) :?>
-             ->addValidator('email')
+->addValidator('email')
         <? endif;?>
-             ->addFilter('StringTrim');
+    ->addFilter('StringTrim');
     <?endif;?>
     <?endif;?>
         <?php endforeach;?>
+
+    <?php foreach ($this->getForeignKeysInfo() as $key): ?>
+    
+    /**
+     * Form Element type Select     
+     *
+     * @var Zend_Form_Element_Select <?=$this->_getRelationName($key, 'parent') . "\n"?>
+     */
+    $this->addElement('select', '<?=$this->_getRelationName($key, 'parent')?>', array('label' => '<?=$key['foreign_tbl_name']?>'));
+    $<?=lcfirst($this->_getRelationName($key, 'parent'))?> = $this->getElement('<?=$this->_getRelationName($key, 'parent')?>');
+    $modelObj = new <?=$this->_namespace?>Model_<?=$this->_getClassName($key['foreign_tbl_name'])?>;
+    foreach ($modelObj->getMapper()->fetchAllToArray() as $row) {
+            $<?=lcfirst($this->_getRelationName($key, 'parent'))?>->addMultiOption($row['<?=$key['foreign_tbl_column_name']?>'], $row['<?=$key['foreign_tbl_name']?>']);
+        }
+    $<?=lcfirst($this->_getRelationName($key, 'parent'))?>->setRequired(true);
+
+    <?php endforeach;?>
+    
+    /**
+     * Form Element type Submit
+     *
+     * @var Zend_Form_Element_Submit submit
+     */
+    $this->addElement('submit', 'Submit', array('label' => 'Submit'));
+    $this->getElement('Submit')
+         ->setIgnore(true);
     }
 }
