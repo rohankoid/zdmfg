@@ -3,7 +3,8 @@
 /**
  * main class for files creation
  */
-abstract class MakeDbTable {
+abstract class MakeDbTable
+{
 
     /**
      *  @var String $_tbname;
@@ -138,7 +139,8 @@ abstract class MakeDbTable {
      *
      * @param array $info
      */
-    public function setForeignKeysInfo($info) {
+    public function setForeignKeysInfo($info)
+    {
         $this->_foreignKeysInfo = $info;
     }
 
@@ -146,7 +148,8 @@ abstract class MakeDbTable {
      *
      * @return array
      */
-    public function getForeignKeysInfo() {
+    public function getForeignKeysInfo()
+    {
         return $this->_foreignKeysInfo;
     }
 
@@ -154,7 +157,8 @@ abstract class MakeDbTable {
      *
      * @param string $location
      */
-    public function setLocation($location) {
+    public function setLocation($location)
+    {
         $this->_location = $location;
     }
 
@@ -162,7 +166,8 @@ abstract class MakeDbTable {
      *
      * @return string
      */
-    public function getLocation() {
+    public function getLocation()
+    {
         return $this->_location;
     }
 
@@ -170,7 +175,8 @@ abstract class MakeDbTable {
      *
      * @param string $table
      */
-    public function setTableName($table) {
+    public function setTableName($table)
+    {
         $this->_tbname = $table;
         $this->_className = $this->_getClassName($table);
     }
@@ -179,7 +185,8 @@ abstract class MakeDbTable {
      *
      * @return string
      */
-    public function getTableName() {
+    public function getTableName()
+    {
         return $this->_tbname;
     }
 
@@ -187,14 +194,16 @@ abstract class MakeDbTable {
      *
      * @param array $list
      */
-    public function setTableList($list) {
+    public function setTableList($list)
+    {
         $this->_tableList = $list;
     }
 
     /**
      * @return array
      */
-    public function getTableList() {
+    public function getTableList()
+    {
         return $this->_tableList;
     }
 
@@ -202,14 +211,16 @@ abstract class MakeDbTable {
      *
      * @param array $list
      */
-    public function setDependentTables($tables) {
+    public function setDependentTables($tables)
+    {
         $this->_dependentTables = $tables;
     }
 
     /**
      * @return array
      */
-    public function getDependentTables() {
+    public function getDependentTables()
+    {
         return $this->_dependentTables;
     }
 
@@ -217,7 +228,8 @@ abstract class MakeDbTable {
      *
      * @param string $location
      */
-    public function setIncludePath($path) {
+    public function setIncludePath($path)
+    {
         $this->_includePath = $path;
     }
 
@@ -225,7 +237,8 @@ abstract class MakeDbTable {
      *
      * @return string
      */
-    public function getIncludePath() {
+    public function getIncludePath()
+    {
         return $this->_includePath;
     }
 
@@ -237,7 +250,8 @@ abstract class MakeDbTable {
      * @param String $str
      * @return String
      */
-    protected function _getCapital($str) {
+    protected function _getCapital($str)
+    {
         $temp = '';
         foreach (explode("_", $str) as $part) {
             $temp.=ucfirst($part);
@@ -253,10 +267,11 @@ abstract class MakeDbTable {
      * @param String $str
      * @return String
      */
-    protected function _getLabel($str) {
+    protected function _getLabel($str)
+    {
         $temp = array();
-        foreach (explode("_", $str) as $part) {            
-            $temp[]=ucfirst($part);
+        foreach (explode("_", $str) as $part) {
+            $temp[] = ucfirst($part);
         }
         $temp = implode(" ", $temp);
         return $temp;
@@ -269,7 +284,8 @@ abstract class MakeDbTable {
      * @param string $str
      * @return string
      */
-    protected function _getClassName($str) {
+    protected function _getClassName($str)
+    {
         $temp = '';
         // Remove common prefixes
         foreach ($this->_tablePrefixes as $prefix) {
@@ -302,7 +318,8 @@ abstract class MakeDbTable {
      * @param string $str
      * @return string
      */
-    protected function _getRelationName(array $relation_info, $type = 'parent') {
+    protected function _getRelationName(array $relation_info, $type = 'parent')
+    {
         if ($type == 'parent') {
             // Check if a column exists with the same resulting name
             $str = $this->_getClassName($relation_info['column_name']);
@@ -351,7 +368,8 @@ abstract class MakeDbTable {
      */
     abstract protected function _convertTypeToPhp($str);
 
-    public function parseTable() {
+    public function parseTable()
+    {
         $this->parseDescribeTable();
         $this->parseForeignKeys();
         $this->parseDependentTables();
@@ -375,7 +393,8 @@ abstract class MakeDbTable {
      * @param String $dbname
      * @param String $namespace
      */
-    function __construct($config, $dbname, $namespace) {
+    function __construct($config, $dbname, $namespace)
+    {
 
         $columns = array();
         $primaryKey = array();
@@ -437,7 +456,8 @@ abstract class MakeDbTable {
      * @param String $tplFile
      * @return String
      */
-    public function getParsedTplContents($tplFile, $vars = array()) {
+    public function getParsedTplContents($tplFile, $vars = array())
+    {
         extract($vars);
         ob_start();
         require(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . $tplFile);
@@ -449,7 +469,8 @@ abstract class MakeDbTable {
     /**
      * creates the DbTable class file
      */
-    function makeDbTableFile() {
+    function makeDbTableFile()
+    {
 
         $class = 'DbTable_' . $this->_className;
         $file = $this->getIncludePath() . $class . '.inc.php';
@@ -515,7 +536,8 @@ abstract class MakeDbTable {
     /**
      * creates the Mapper class file
      */
-    function makeMapperFile() {
+    function makeMapperFile()
+    {
 
         $class = 'Mapper_' . $this->_className;
         $file = $this->getIncludePath() . $class . '.inc.php';
@@ -539,7 +561,8 @@ abstract class MakeDbTable {
     /**
      * creates the model class file
      */
-    function makeModelFile() {
+    function makeModelFile()
+    {
 
         $class = 'Model_' . $this->_className;
         $file = $this->getIncludePath() . $class . '.inc.php';
@@ -564,7 +587,8 @@ abstract class MakeDbTable {
      * @author Rohan <rohankoid@gmail.com>
      * creates the form class file
      */
-    function makeFormFile() {
+    function makeFormFile()
+    {
 
         $class = 'Form_' . $this->_className;
         $file = $this->getIncludePath() . $class . '.inc.php';
@@ -575,8 +599,8 @@ abstract class MakeDbTable {
         } else {
             $this->_includeForm = new Form_Default($this->_namespace);
         }
-        
-        $formFile = $this->getLocation() .DIRECTORY_SEPARATOR. '..'. DIRECTORY_SEPARATOR . 'forms' . DIRECTORY_SEPARATOR . $this->_className . '.php';
+
+        $formFile = $this->getLocation() . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'forms' . DIRECTORY_SEPARATOR . $this->_className . '.php';
 
         $formData = $this->getParsedTplContents('form.tpl');
 
@@ -584,14 +608,15 @@ abstract class MakeDbTable {
             die("Error: could not write form file $formFile.");
         }
     }
-    
+
     /**
      *
      * creates all class files
      *
      * @return Boolean
      */
-    function doItAll() {
+    function doItAll()
+    {
 
         $this->makeDbTableFile();
         $this->makeMapperFile();
@@ -607,8 +632,8 @@ abstract class MakeDbTable {
         /**
          * BaseForm Class Generator
          */
-        $formFile = $this->getLocation() .DIRECTORY_SEPARATOR.'..'. DIRECTORY_SEPARATOR . 'forms' . DIRECTORY_SEPARATOR . 'BaseForm.php';
-        $formData = $this->getParsedTplContents('form_class.tpl');        
+        $formFile = $this->getLocation() . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'forms' . DIRECTORY_SEPARATOR . 'BaseForm.php';
+        $formData = $this->getParsedTplContents('form_class.tpl');
 
         if (!file_put_contents($formFile, $formData))
             die("Error: could not write form file $formFile.");
@@ -647,7 +672,7 @@ abstract class MakeDbTable {
         }
 
         if (is_dir($this->getIncludePath() . 'form')) {
-            $this->copyIncludeFiles($this->getIncludePath() . 'form', $this->getLocation() .DIRECTORY_SEPARATOR.'..'. DIRECTORY_SEPARATOR.'forms');
+            $this->copyIncludeFiles($this->getIncludePath() . 'form', $this->getLocation() . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'forms');
         }
 
         /* 		$templatesDir=realpath(dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'templates').DIRECTORY_SEPARATOR;
@@ -663,7 +688,8 @@ abstract class MakeDbTable {
         return true;
     }
 
-    protected function copyIncludeFiles($dir, $dest) {
+    protected function copyIncludeFiles($dir, $dest)
+    {
         $files = array();
         $directory = opendir($dir);
 
