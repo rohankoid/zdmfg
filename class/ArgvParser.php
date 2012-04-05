@@ -27,9 +27,9 @@ parameters:
  *  --tables-regex        : add tables by perl regular expression
 
                     parameters with * can be used more then once.
- example: zdmg.php --database foo --table foobar --tables-regex ^bar_ --ignore-table bar_abc
+ example: zdmfg.php --database foo --table foobar --tables-regex ^bar_ --ignore-table bar_abc
 
-zend-db-form & model-generator By: $this->_author Version: $this->_version
+zend-db-model-&-form-generator By: $this->_author Version: $this->_version
 
 USAGE;
     }

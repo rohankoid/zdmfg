@@ -117,4 +117,42 @@ class <?=$this->_namespace?>Form_<?=$this->_className?> extends <?=$this->_inclu
         $this->getElement('Submit')
              ->setIgnore(true);
     }
+
+    /**
+     * Maps <?=$this->_namespace?>Form_<?=$this->_className?> form's array of
+     * data to <?=$this->_namespace?>Model_<?=$this->_className?> object
+     *
+     * @param Array $data
+     * @param <?=$this->_namespace?>Model_<?=$this->_className?> $modelObj
+     */
+    public function mapFormToDb($data, <?=$this->_namespace?>Model_<?=$this->_className?> $modelObj)
+    {
+    <?php foreach ($this->_columns as $column): ?>
+    <?php if(!preg_match('/id/i', $column['field'])):?>            
+        $modelObj->set<?=$column['capital']?>($data['<?=$column['capital']?>']);
+    <?php endif;?>
+    <? endforeach;?>
+    <?php foreach ($this->getForeignKeysInfo() as $key): ?>        
+         $modelObj->set<?=$this->_getCapital($key['column_name'])?>($data['<?=$this->_getCapital($key['column_name'])?>']);
+    <?php endforeach;?>
+    }
+
+    /**
+     * Map <?=$this->_namespace?>Model_<?=$this->_className?> Object Elements to <?=$this->_namespace?>Form_<?=$this->_className?> form's Array
+     *
+     * @param <?=$this->_namespace?>Model_<?=$this->_className?> $modelObj
+     * @return Array $data
+     */
+     public function mapDbToForm(<?=$this->_namespace?>Model_<?=$this->_className?> $modelObj)
+     {
+    <?php foreach ($this->_columns as $column): ?>
+    <?php if(!preg_match('/id/i', $column['field'])):?>        
+        $data['<?=$column['capital']?>']= $modelObj->get<?=$column['capital']?>();
+    <?php endif;?>
+    <? endforeach;?>
+    <?php foreach ($this->getForeignKeysInfo() as $key): ?>       
+         $data['<?=$this->_getCapital($key['column_name'])?>']= $modelObj->get<?=$this->_getCapital($key['column_name'])?>();
+    <?php endforeach;?>
+
+     }
 }
