@@ -15,7 +15,7 @@ class <?=$this->_namespace?>Form_<?=$this->_className?> extends <?=$this->_inclu
     public function _init()
     {
     <?php foreach ($this->_columns as $column): ?>
-    <?php if(!preg_match('/id/i', $column['field'])):?>
+    <?php if(!preg_match('/_id/i', $column['field']) && strtolower(substr($column['field'], 0, 2)!= 'id')):?>
     <?php if($column['phptype'] == 'boolean'):?>
 
         /**
@@ -128,13 +128,16 @@ class <?=$this->_namespace?>Form_<?=$this->_className?> extends <?=$this->_inclu
     public function mapFormToDb($data, <?=$this->_namespace?>Model_<?=$this->_className?> $modelObj)
     {
     <?php foreach ($this->_columns as $column): ?>
-    <?php if(!preg_match('/id/i', $column['field'])):?>            
+    <?php if(!preg_match('/_id/i', $column['field']) && strtolower(substr($column['field'], 0, 2)!= 'id')):?>
+
         $modelObj->set<?=$column['capital']?>($data['<?=$column['capital']?>']);
     <?php endif;?>
     <? endforeach;?>
-    <?php foreach ($this->getForeignKeysInfo() as $key): ?>        
-         $modelObj->set<?=$this->_getCapital($key['column_name'])?>($data['<?=$this->_getCapital($key['column_name'])?>']);
+    <?php foreach ($this->getForeignKeysInfo() as $key): ?>
+
+        $modelObj->set<?=$this->_getCapital($key['column_name'])?>($data['<?=$this->_getCapital($key['column_name'])?>']);
     <?php endforeach;?>
+        
     }
 
     /**
@@ -146,12 +149,14 @@ class <?=$this->_namespace?>Form_<?=$this->_className?> extends <?=$this->_inclu
      public function mapDbToForm(<?=$this->_namespace?>Model_<?=$this->_className?> $modelObj)
      {
     <?php foreach ($this->_columns as $column): ?>
-    <?php if(!preg_match('/id/i', $column['field'])):?>        
+    <?php if(!preg_match('/_id/i', $column['field']) && strtolower(substr($column['field'], 0, 2)!= 'id')):?>
+
         $data['<?=$column['capital']?>']= $modelObj->get<?=$column['capital']?>();
     <?php endif;?>
     <? endforeach;?>
-    <?php foreach ($this->getForeignKeysInfo() as $key): ?>       
-         $data['<?=$this->_getCapital($key['column_name'])?>']= $modelObj->get<?=$this->_getCapital($key['column_name'])?>();
+    <?php foreach ($this->getForeignKeysInfo() as $key): ?>
+        
+        $data['<?=$this->_getCapital($key['column_name'])?>']= $modelObj->get<?=$this->_getCapital($key['column_name'])?>();
     <?php endforeach;?>
 
      }
