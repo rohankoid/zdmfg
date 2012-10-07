@@ -91,7 +91,7 @@ class <?=$this->_namespace?>Form_<?=$this->_className?> extends <?=$this->_inclu
         <?php endforeach;?>
 
     <?php foreach ($this->getForeignKeysInfo() as $key): ?>
-
+    
         /**
          * Form Element type Select
          *
@@ -137,7 +137,7 @@ class <?=$this->_namespace?>Form_<?=$this->_className?> extends <?=$this->_inclu
 
         $modelObj->set<?=$this->_getCapital($key['column_name'])?>($data['<?=$this->_getCapital($key['column_name'])?>']);
     <?php endforeach;?>
-
+        
     }
 
     /**
@@ -155,7 +155,7 @@ class <?=$this->_namespace?>Form_<?=$this->_className?> extends <?=$this->_inclu
     <?php endif;?>
     <? endforeach;?>
     <?php foreach ($this->getForeignKeysInfo() as $key): ?>
-
+        
         $data['<?=$this->_getCapital($key['column_name'])?>']= $modelObj->get<?=$this->_getCapital($key['column_name'])?>();
     <?php endforeach;?>
 

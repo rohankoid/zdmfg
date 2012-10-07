@@ -131,6 +131,9 @@ $users->save();
 
 ** more examples can be found in testzdmg directory.
 
-THANKS
+All Credit Goes to Steven Hadfield, Thanks to 
 ------
+I want to thank the following people for their feedback/patches/comments:
+Charles Spraggs,Richard Hamilton,AJIT DIXIT,Aleksandar Scepanovic,Ivan
+Mosquera Paulo, Rohan
 
