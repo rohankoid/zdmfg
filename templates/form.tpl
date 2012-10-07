@@ -39,7 +39,7 @@ class <?=$this->_namespace?>Form_<?=$this->_className?> extends <?=$this->_inclu
         <? } ?>
              ->addFilter('StringTrim');
     <?php elseif (preg_match('/password/i', $column['field'])) :?>
-             
+
         /**
          * Form Element type Password
          *
@@ -91,7 +91,7 @@ class <?=$this->_namespace?>Form_<?=$this->_className?> extends <?=$this->_inclu
         <?php endforeach;?>
 
     <?php foreach ($this->getForeignKeysInfo() as $key): ?>
-    
+
         /**
          * Form Element type Select
          *
@@ -107,7 +107,7 @@ class <?=$this->_namespace?>Form_<?=$this->_className?> extends <?=$this->_inclu
         $<?=lcfirst($this->_getRelationName($key, 'parent'))?>->setRequired(true);
 
     <?php endforeach;?>
-    
+
         /**
          * Form Element type Submit
          *
@@ -137,7 +137,7 @@ class <?=$this->_namespace?>Form_<?=$this->_className?> extends <?=$this->_inclu
 
         $modelObj->set<?=$this->_getCapital($key['column_name'])?>($data['<?=$this->_getCapital($key['column_name'])?>']);
     <?php endforeach;?>
-        
+
     }
 
     /**
@@ -155,9 +155,10 @@ class <?=$this->_namespace?>Form_<?=$this->_className?> extends <?=$this->_inclu
     <?php endif;?>
     <? endforeach;?>
     <?php foreach ($this->getForeignKeysInfo() as $key): ?>
-        
+
         $data['<?=$this->_getCapital($key['column_name'])?>']= $modelObj->get<?=$this->_getCapital($key['column_name'])?>();
     <?php endforeach;?>
 
+        return $data;
      }
 }
