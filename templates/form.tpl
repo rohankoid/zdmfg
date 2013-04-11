@@ -12,7 +12,7 @@
 
 class <?=$this->_namespace?>Form_<?=$this->_className?> extends <?=$this->_includeForm->getParentClass() . "\n"?>
 {
-    public function _init()
+    public function init()
     {
     <?php foreach ($this->_columns as $column): ?>
     <?php if(!preg_match('/_id/i', $column['field']) && strtolower(substr($column['field'], 0, 2)!= 'id')):?>
